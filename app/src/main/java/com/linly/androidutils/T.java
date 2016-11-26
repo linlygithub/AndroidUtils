@@ -65,5 +65,4 @@ public class T {
             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
         }
     }
-
 }

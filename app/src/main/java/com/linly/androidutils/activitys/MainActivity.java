@@ -1,15 +1,89 @@
 package com.linly.androidutils.activitys;
 
+import android.app.Activity;
+import android.app.backup.SharedPreferencesBackupHelper;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.support.annotation.IntRange;
+import android.support.v4.content.SharedPreferencesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
+import com.linly.androidutils.L;
 import com.linly.androidutils.R;
+import com.linly.androidutils.SPUtils;
+import com.linly.androidutils.T;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.HashSet;
+import java.util.Set;
 
+import static android.preference.PreferenceManager.getDefaultSharedPreferences;
+import static com.linly.androidutils.SPUtils.contains;
+import static com.linly.androidutils.SPUtils.get;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private String TAG = getClass().getSimpleName();
+    Set<String> set = new HashSet<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Button t1 = (Button) findViewById(R.id.bt1);
+        Button t2 = (Button) findViewById(R.id.bt2);
+        Button t3 = (Button) findViewById(R.id.bt3);
+        Button t4 = (Button) findViewById(R.id.bt4);
+        Button t5 = (Button) findViewById(R.id.bt5);
+        Button t6 = (Button) findViewById(R.id.bt6);
+
+        t1.setOnClickListener(this);
+        t2.setOnClickListener(this);
+        t3.setOnClickListener(this);
+        t4.setOnClickListener(this);
+        t5.setOnClickListener(this);
+        t6.setOnClickListener(this);
+
+        set.add("haha");
+        set.add("hehe");
+        set.add("wuwu");
+        set.add("xixi");
+    }
+
+
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.bt1:
+                SPUtils.put(MainActivity.this,"test_string","string");
+                SPUtils.put(MainActivity.this,"test_int",123);
+                SPUtils.put(MainActivity.this,"test_float",1.2f);
+                SPUtils.put(MainActivity.this,"test_boolean",true);
+                SPUtils.put(MainActivity.this,"test_long",100L);
+                SPUtils.put(MainActivity.this,"test_string_set",set);
+                break;
+            case R.id.bt2:
+                int i = (int) SPUtils.get(MainActivity.this,"test_int",0);
+                T.showLong(MainActivity.this,i+"");
+                break;
+            case R.id.bt3:
+                SPUtils.clear(MainActivity.this);
+                break;
+            case R.id.bt4:
+                boolean b = SPUtils.contains(MainActivity.this,"test_boolean");
+                if(b) {
+                    T.showShort(MainActivity.this,"返回true");
+                }
+                break;
+            case R.id.bt5:
+                SPUtils.remove(MainActivity.this,"test_long");
+                break;
+            case R.id.bt6:
+                break;
+
+        }
     }
 }
