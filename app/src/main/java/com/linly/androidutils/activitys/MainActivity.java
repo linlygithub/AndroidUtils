@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.linly.androidutils.L;
+import com.linly.androidutils.NetUtils;
 import com.linly.androidutils.R;
 import com.linly.androidutils.SPUtils;
 import com.linly.androidutils.T;
@@ -21,6 +22,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
+import static com.linly.androidutils.R.id.bt1;
 import static com.linly.androidutils.SPUtils.contains;
 import static com.linly.androidutils.SPUtils.get;
 
@@ -32,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button t1 = (Button) findViewById(R.id.bt1);
+        Button t1 = (Button) findViewById(bt1);
         Button t2 = (Button) findViewById(R.id.bt2);
         Button t3 = (Button) findViewById(R.id.bt3);
         Button t4 = (Button) findViewById(R.id.bt4);
@@ -57,20 +59,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.bt1:
-                SPUtils.put(MainActivity.this,"test_string","string");
-                SPUtils.put(MainActivity.this,"test_int",123);
-                SPUtils.put(MainActivity.this,"test_float",1.2f);
-                SPUtils.put(MainActivity.this,"test_boolean",true);
-                SPUtils.put(MainActivity.this,"test_long",100L);
-                SPUtils.put(MainActivity.this,"test_string_set",set);
+            case bt1:
+                if(NetUtils.isConnection(getApplicationContext())){
+                    T.showShort(MainActivity.this,"返回true");
+                }else{
+                    T.showShort(MainActivity.this,"返回false");
+                }
                 break;
             case R.id.bt2:
-                int i = (int) SPUtils.get(MainActivity.this,"test_int",0);
-                T.showLong(MainActivity.this,i+"");
+
+                if(NetUtils.isWifiConnection(getApplicationContext())){
+                    T.showShort(MainActivity.this,"返回true");
+                }else{
+                    T.showShort(MainActivity.this,"返回false");
+                }
                 break;
             case R.id.bt3:
-                SPUtils.clear(MainActivity.this);
+                NetUtils.openSetting(MainActivity.this);
                 break;
             case R.id.bt4:
                 boolean b = SPUtils.contains(MainActivity.this,"test_boolean");
