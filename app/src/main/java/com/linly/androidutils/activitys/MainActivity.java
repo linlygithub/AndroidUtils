@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.linly.androidutils.L;
 import com.linly.androidutils.NetUtils;
 import com.linly.androidutils.R;
+import com.linly.androidutils.SDCardUtils;
 import com.linly.androidutils.SPUtils;
 import com.linly.androidutils.T;
 
@@ -23,6 +24,7 @@ import java.util.Set;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 import static com.linly.androidutils.R.id.bt1;
+import static com.linly.androidutils.SDCardUtils.convertToString;
 import static com.linly.androidutils.SPUtils.contains;
 import static com.linly.androidutils.SPUtils.get;
 
@@ -60,11 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case bt1:
-                if(NetUtils.isConnection(getApplicationContext())){
-                    T.showShort(MainActivity.this,"返回true");
-                }else{
-                    T.showShort(MainActivity.this,"返回false");
-                }
+               L.d("convertToString",SDCardUtils.convertToString(SDCardUtils.getSdcardSize()));
                 break;
             case R.id.bt2:
 
@@ -78,13 +76,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 NetUtils.openSetting(MainActivity.this);
                 break;
             case R.id.bt4:
-                boolean b = SPUtils.contains(MainActivity.this,"test_boolean");
-                if(b) {
+                if (SDCardUtils.isSdcardEnable()){
                     T.showShort(MainActivity.this,"返回true");
                 }
+                L.d("getSdcardPath",SDCardUtils.getSdcardPath());
                 break;
             case R.id.bt5:
-                SPUtils.remove(MainActivity.this,"test_long");
+                SDCardUtils.getSdcardSize();
                 break;
             case R.id.bt6:
                 break;

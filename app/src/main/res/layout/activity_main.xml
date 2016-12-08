@@ -16,7 +16,8 @@
         android:id="@+id/bt1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="testConnection"/>
+        android:text="size"
+        android:textAlignment="center"/>
 
     <Button
         android:id="@+id/bt2"
@@ -34,12 +35,12 @@
         android:id="@+id/bt4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="contains"/>
+        android:text="SdcardPath"/>
     <Button
         android:id="@+id/bt5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="remove"/>
+        android:text="getblocks"/>
     <Button
         android:id="@+id/bt6"
         android:layout_width="wrap_content"
