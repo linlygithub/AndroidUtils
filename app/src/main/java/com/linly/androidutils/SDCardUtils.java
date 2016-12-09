@@ -48,10 +48,11 @@ public class SDCardUtils {
 
     public static String convertToString(long fileSize){
         if(fileSize < 0){
-            return "0";
+            return "0B";
         }
         final String[] Utils = new String[]{"B","KB","MB","GB","TB"};
         int n = (int) (Math.log10(fileSize)/Math.log10(1024));
         return new DecimalFormat("#,##0.#").format(fileSize/Math.pow(1024, n)) + "" + Utils[n];
     }
+
 }

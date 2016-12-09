@@ -12,11 +12,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.linly.androidutils.AppUtils;
 import com.linly.androidutils.L;
 import com.linly.androidutils.NetUtils;
 import com.linly.androidutils.R;
 import com.linly.androidutils.SDCardUtils;
 import com.linly.androidutils.SPUtils;
+import com.linly.androidutils.ScreenUtils;
 import com.linly.androidutils.T;
 
 import java.util.HashSet;
@@ -62,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case bt1:
-               L.d("convertToString",SDCardUtils.convertToString(SDCardUtils.getSdcardSize()));
+                AppUtils.getAppVersionName(this);
                 break;
             case R.id.bt2:
 
